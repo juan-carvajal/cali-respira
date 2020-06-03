@@ -42,7 +42,7 @@ g = GoogleVisibleMap(x=[-76.533, -76.525], y=[3.340, 3.375],
                      scale=2,  # scale is for more details
                      maptype='roadmap')
 
-f, ax = plt.subplots(1,2, figsize=(5, 5))
+f, ax = plt.subplots(1,2, figsize=(10, 5))
 ggl_img = g.get_vardata()
 
 sm = Map(g.grid, factor=1, countries=False)
@@ -52,8 +52,8 @@ sm.visualize(ax=ax[0])
 sm2 = Map(g.grid, factor=1, countries=False)
 sm2.set_rgb(ggl_img)
 sm2.visualize(ax=ax[1])
-ax[0].set_title('Datos Crudos')
-ax[1].set_title('Datos Limpios')
+ax[0].set_title('Raw Data')
+ax[1].set_title('Filtered Data')
 
 full_size=len(full.index)
 cleaned_size=len(cleaned.index)

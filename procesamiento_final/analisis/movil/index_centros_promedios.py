@@ -12,13 +12,13 @@ import geopy.distance
 def color(val):
     # print(val)
     if val <= 12:
-        return 'green'
+        return 'lightgreen'
     elif val > 12 and val <= 35:
-        return 'yellow'
+        return 'wheat'
     elif val > 35 and val < 55:
-        return 'orange'
+        return 'salmon'
     else:
-        return 'red'
+        return 'tomato'
 
 
 def mean_pm(x):
@@ -81,11 +81,11 @@ groups = centers.where(centers['Modo'] == tipo).groupby('Indice_Corregido')
 # ax.scatter(x, y, s=200,c='white',edgecolors='black', alpha=1)
 for name, group in groups:
     mean=mean_pm(group['PM2.5'])
-    bbox_props = dict(boxstyle="circle,pad=0.3", fc=color(mean), ec="black", lw=0.5)
+    bbox_props = dict(boxstyle="circle,pad=0.3", fc=color(mean), ec="black", lw=2)
     x,y=sm.grid.transform(group['Longitud_Centro'].values[0], group['Latitud_Centro'].values[0])
     ax.text(x, y, mean, ha="center", va="center",
             size=8,
-            bbox=bbox_props)
+            bbox=bbox_props ,weight="bold")
 
 # x, y = sm.grid.transform(x, y)
 # for i, txt in enumerate(n):

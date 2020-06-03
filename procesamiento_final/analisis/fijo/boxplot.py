@@ -14,10 +14,10 @@ DE MAS). SE ESTAN SALTANDO 9 LINEAS DEL CSV.
 
 """
 
-days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 # series = read_csv('DMR.csv', parse_dates=True, skiprows=1,
 #                   names=['Sesion', 'Timestamp', 'Latitud', 'Longitud', 'PM2.5'])
-sesion = 'KOM'
+sesion = 'DMR'
 series = pd.read_csv("../../datos/fijo/" + sesion + ".csv", parse_dates=True)
 series['Timestamp'] = pd.to_datetime(series['Timestamp'])
 # series['time'] = series['time'] - timedelta(hours=1)
@@ -32,12 +32,13 @@ for name, group in groups:
     day['Hora'] = day['time'].dt.hour
     print(days[name] + ':', day)
     pyplot.grid(True)
-    ax = sns.boxplot(x="Hora", y="PM2.5", data=day, showmeans=True).set_title('F-'+sesion+' - Cajas: ' + days[name])
+    day['Hour']=day['Hora']
+    ax = sns.boxplot(x="Hour", y="PM2.5", data=day, showmeans=True).set_title('F-'+sesion+' - Boxplot: ' + days[name])
 
     pyplot.savefig('./graficos/' + sesion+'_cajas_' + days[name] + '.png', dpi=300)
     pyplot.show()
 
-    ax = sns.distplot(day['PM2.5'].dropna(), hist_kws=dict(edgecolor="k", linewidth=2)).set_title('F-'+sesion+' - Histograma: ' + days[name])
+    ax = sns.distplot(day['PM2.5'].dropna(), hist_kws=dict(edgecolor="k", linewidth=2)).set_title('F-'+sesion+' - Histogram: ' + days[name])
     pyplot.savefig('./graficos/' + sesion+'_histograma_' + days[name] + '.png', dpi=300)
     pyplot.show()
 
